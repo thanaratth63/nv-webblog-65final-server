@@ -1,4 +1,7 @@
 const UserController = require('./controllers/UserController')
+const CoffeeController = require('./controllers/CoffeeController')
+const UserAuthenController = require('./controllers/UserAuthenController');
+const isAuthenController = require('./authen/isAuthenController')
 
 module.exports = (app) => {
     app.post('/user', UserController.create)
@@ -9,5 +12,17 @@ module.exports = (app) => {
     
     app.get('/user/:userId', UserController.show)
     
-    app.get('/users', UserController.index)
+    app.get('/users', isAuthenController, UserController.index)
+
+    //Coffee
+    app.post('/Coffee', CoffeeController.create)
+    
+    app.put('/Coffee/:CoffeeId', CoffeeController.put)
+    
+    app.delete('/Coffee/:CoffeeId', CoffeeController.remove)
+    
+    app.get('/Coffee/:CoffeeId', CoffeeController.show)
+    
+    app.get('/Coffees', CoffeeController.index)
+
 }
